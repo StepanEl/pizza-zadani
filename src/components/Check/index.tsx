@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
 import './style.css';
 
-const Check = ()  => {
-  const [checked, setChecked] = useState(false);
+interface ICheckProps {
+  check: boolean;
+  onCheckChange: (selected: boolean) => void;
+}
+
+const Check = ({ check, onCheckChange }: ICheckProps) => {
 
   const handleClick = () => {
-    setChecked(!checked);
+    onCheckChange(!check);
   };
 
   return (
@@ -13,7 +16,7 @@ const Check = ()  => {
       className="check"
       onClick={handleClick}
     >
-      {checked ? '✓' : ''}
+      {check ? '✓' : ''}
     </button>
   )
 };
