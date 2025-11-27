@@ -3,9 +3,10 @@ import './style.css';
 interface ICheckProps {
   check: boolean;
   onCheckChange: (selected: boolean) => void;
+  disabled: boolean;
 }
 
-const Check = ({ check, onCheckChange }: ICheckProps) => {
+const Check = ({ check, disabled, onCheckChange }: ICheckProps) => {
 
   const handleClick = () => {
     onCheckChange(!check);
@@ -13,8 +14,9 @@ const Check = ({ check, onCheckChange }: ICheckProps) => {
 
   return (
     <button
-      className="check"
+      className= {disabled ? "check check--disabled" : "check"}
       onClick={handleClick}
+      disabled={disabled}
     >
       {check ? '✓' : ''}
     </button>

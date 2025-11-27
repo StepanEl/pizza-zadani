@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import ToppingsSelect from './components/ToppingsSelect';
-import type {ITopping} from './models/Topping';
+import { PrefsContext } from './context/prefs-context';
+import type { ITopping } from './models/Topping';
 import './style.css';
 
 const toppings: ITopping[] = [
@@ -78,16 +80,35 @@ const toppings: ITopping[] = [
 ];
 
 const App = () => {
+  const [answer, setAnswer] = useState("");
+  const [veganOnly, setVeganOnly] = useState(false)
+
+  const handleSelectChange= (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    setAnswer(value);
+    setVeganOnly(value === "ano");
+  }
+
   return (
-    <div className="container">
-      <header>
-        <div className="pizza" />
-        <h1>Build your own pizza</h1>
-      </header>
-      <main>
-        <ToppingsSelect toppings={toppings} />
-      </main>
-    </div>
+    <>
+      <select value={answer} onChange={handleSelectChange}>
+        <option value="">Vyber</option>
+        <option value="ano">Ano</option>
+        <option value="ne">Ne</option>
+      </select>
+
+      <PrefsContext.Provider value={{ veganOnly}}>
+        <div className="container">
+          <header>
+            <div className="pizza" />
+            <h1>Build your own pizza</h1>
+          </header>
+          <main>
+            <ToppingsSelect toppings={toppings} />
+          </main>
+        </div>
+      </PrefsContext.Provider>
+    </>
   );
 };
 

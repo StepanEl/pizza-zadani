@@ -17,9 +17,10 @@ const ToppingsSelect = ({ toppings }: IToppingsSelectProps) => {
     setItems(newToppings);
   }
 
-const selectedToppings = items.filter(t => t.selected);
-const selectedCount = selectedToppings.length;
-const totalPrice = selectedToppings.reduce((sum, t) => sum + t.price, 0);
+
+  const selectedToppings = items.filter(t => t.selected);
+  const selectedCount = selectedToppings.length;
+  const totalPrice = selectedToppings.reduce((sum, t) => sum + t.price, 0);
 
   return (
     <>
