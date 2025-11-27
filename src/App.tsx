@@ -80,29 +80,27 @@ const toppings: ITopping[] = [
 ];
 
 const App = () => {
-  const [answer, setAnswer] = useState("");
   const [veganOnly, setVeganOnly] = useState(false)
-
-  const handleSelectChange= (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
-    setAnswer(value);
-    setVeganOnly(value === "ano");
-  }
 
   return (
     <>
-      <select value={answer} onChange={handleSelectChange}>
-        <option value="">Vyber</option>
-        <option value="ano">Ano</option>
-        <option value="ne">Ne</option>
-      </select>
 
-      <PrefsContext.Provider value={{ veganOnly}}>
+
+      <PrefsContext.Provider value={{ veganOnly }}>
         <div className="container">
           <header>
             <div className="pizza" />
             <h1>Build your own pizza</h1>
           </header>
+          <div className='right'>
+            <button
+              className={veganOnly ? "active" : ""}
+              onClick={() => setVeganOnly(!veganOnly)}
+            >
+              Vegan only
+            </button>
+          </div>
+
           <main>
             <ToppingsSelect toppings={toppings} />
           </main>
